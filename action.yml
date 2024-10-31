@@ -5,11 +5,6 @@ description: >
 branding:
   icon: check
   color: green
-runs:
-  using: docker
-  image: Dockerfile
-  entrypoint: "/entrypoint.sh"
-  post-entrypoint: "/cleanup.sh"
 inputs:
   args:
     description: Additional arguments to the sonarcloud scanner
@@ -18,3 +13,16 @@ inputs:
     description: Set the sonar.projectBaseDir analysis property
     required: false
     default: .
+  scannerVersion:
+    description: Version of the Sonar Scanner CLI to use
+    required: false
+    default: 6.2.0.4584
+runs:
+  using: "composite"
+  steps:
+    - name: SonarQube Cloud Scan
+      uses: antonioaversa/sonarqube-scan-action@master
+      with:
+        args: ${{ inputs.args }}
+        projectBaseDir: ${{ inputs.projectBaseDir }}
+        scannerVersion: ${{ inputs.scannerVersion }}

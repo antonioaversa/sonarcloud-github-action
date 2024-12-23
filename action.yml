@@ -1,28 +1,9 @@
 name: SonarCloud Scan
 description: >
-  Scan your code with SonarCloud to detect bugs, vulnerabilities and code smells
-  in 26+ programming languages.
-branding:
-  icon: check
-  color: green
-inputs:
-  args:
-    description: Additional arguments to the sonarcloud scanner
-    required: false
-  projectBaseDir:
-    description: Set the sonar.projectBaseDir analysis property
-    required: false
-    default: .
-  scannerVersion:
-    description: Version of the Sonar Scanner CLI to use
-    required: false
-    default: 6.2.0.4584
+  For testing. Do not use this GitHub Action. Use the `sonarqube-scan-action` instead.
 runs:
   using: "composite"
   steps:
-    - name: SonarQube Cloud Scan
-      uses: antonioaversa/sonarqube-scan-action@master
-      with:
-        args: ${{ inputs.args }}
-        projectBaseDir: ${{ inputs.projectBaseDir }}
-        scannerVersion: ${{ inputs.scannerVersion }}
+    - name: Fail
+      shell: bash
+      run: exit 1
